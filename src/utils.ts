@@ -1,4 +1,4 @@
-export function shuffle(array: []) {
+export function shuffle(array: string[]) {
     let currentIndex = array.length
     let randomIndex
 

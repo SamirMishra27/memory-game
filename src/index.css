@@ -13,3 +13,44 @@ body {
     height: 100vh;
     background-color: #64748b;
 }
+
+.cards-border {
+    --outer-neon-color: #BFACE2;
+
+    border: 5px solid var(--outer-neon-color);
+    box-shadow: 0 0 20px var(--outer-neon-color);
+
+    animation: glitch-border 5s linear 0s infinite normal forwards;
+}
+
+.card img {
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+.card.guessed {
+    animation: bounce 200ms ease-in-out 0s 1 normal forwards;
+}
+
+.card.matched {
+    border: 3px solid rgb(180, 231, 180);
+    transition: all 200ms ease-in-out;
+}
+
+@keyframes glitch-border {
+    0%, 8%, 16%, 24%, 32%, 40%, 48% {
+        box-shadow: 0 0 20px var(--outer-neon-color);
+    }
+    4%, 12%, 20%, 28%, 36%, 44% {
+        box-shadow: 0 0 10px var(--outer-neon-color);
+    }
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: scaleX(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+}
