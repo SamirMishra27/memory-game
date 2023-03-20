@@ -7,11 +7,10 @@ import hotdog from './assets/hotdog.png'
 import greentea from './assets/greentea.png'
 import eguitar from './assets/eguitar.png'
 
-interface imagesDict {
-    [key: string]: string
-}
+import { ImagesDict } from './types'
 
-export const images: imagesDict = {
+/* cspell:disable */
+export const images: ImagesDict = {
     crab: crab,
     umbrella: umbrella,
     pinetree: pinetree,
@@ -20,5 +19,5 @@ export const images: imagesDict = {
     juice: juice,
     hotdog: hotdog,
     greentea: greentea,
-    eguitar: eguitar
+    eguitar: eguitar,
 }

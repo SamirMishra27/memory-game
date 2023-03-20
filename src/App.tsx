@@ -1,17 +1,29 @@
-import { useState, useRef, MutableRefObject, MouseEvent } from 'react'
+import { useState, useRef, MutableRefObject, MouseEvent, useEffect } from 'react'
 import './index.css'
+
+import GameStats from './components/GameStats'
+import GameSelectionModal from './components/GameSelectionModal'
 
 import { images } from './images'
 import { shuffle } from './utils'
+import { Stopwatch } from './types'
 
 const shuffledImages = shuffle([...Object.keys(images), ...Object.keys(images)])
 
 function App() {
     const cardsRef = useRef() as MutableRefObject<HTMLDivElement>
     const resolveClick = useRef(true)
-    const [lastUpdate, setUpdate] = useState(Date.now())
+    const stopwatchTask = useRef(0)
 
-    const [guessedCards, setGuessed] = useState<number[]>([]) // Array of cad ids
+    const [lastUpdate, setUpdate] = useState(Date.now())
+    const [stopwatch, setStopwatch] = useState<Stopwatch>({
+        seconds: 0,
+        minutes: 0,
+    })
+    const [boardSize, setBoardSize] = useState(16)
+    const [movesCount, setMovesCount] = useState(0)
+
+    const [guessedCards, setGuessed] = useState<number[]>([]) // Array of card ids
     const [matchedCards, setMatched] = useState<string[]>([]) // Array of matched card names
 
     function matchCards() {
@@ -20,14 +32,15 @@ function App() {
         if (shuffledImages[index1] === shuffledImages[index2]) {
             matchedCards.push(shuffledImages[index1])
             setMatched(matchedCards)
-        } // else setGuessed([])
+        }
 
         setGuessed([])
         setUpdate(Date.now())
+        setMovesCount(movesCount + 1)
 
         // Check endgame
         if (shuffledImages.length / 2 === matchedCards.length) {
-            // Do nothing
+            clearInterval(stopwatchTask.current)
         } else resolveClick.current = true
     }
 
@@ -40,7 +53,6 @@ function App() {
 
         setGuessed(guessedCards)
         setUpdate(Date.now())
-        // console.log(cardNumber)
 
         if (guessedCards.length === 2) {
             resolveClick.current = false
@@ -48,8 +60,25 @@ function App() {
         }
     }
 
+    function updateStopwatch() {
+        if (stopwatch.seconds >= 59) {
+            stopwatch.seconds = 0
+            stopwatch.minutes += 1
+        } else stopwatch.seconds += 1
+        setStopwatch({
+            minutes: stopwatch.minutes,
+            seconds: stopwatch.seconds,
+        })
+    }
+
+    useEffect(() => {
+        if (!stopwatchTask.current)
+            stopwatchTask.current = setInterval(() => updateStopwatch(), 1 * 1000)
+    })
+
     return (
         <div className="main w-full h-[100vh] flex items-center justify-center">
+            <GameStats size={boardSize} moves={movesCount} stopwatch={stopwatch} />
             <div
                 className="cards grid grid-cols-4 grid-rows-4 gap-4 bg-[#66347F] p-3 rounded-2xl cards-border items-center justify-evenly"
                 ref={cardsRef}>
@@ -80,6 +109,7 @@ function App() {
                     </div>
                 ))}
             </div>
+            <div className="modal-backdrop" />
         </div>
     )
 }
