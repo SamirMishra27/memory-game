@@ -17,6 +17,15 @@ body {
     font-family: Inter, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+.choice-btn-interact:hover {
+    border-bottom: 0.5rem solid #EA5455;
+    border-top: 0.5rem solid #EA5455;
+}
+
+.select-disappear {
+    animation: select-fade-out 200ms ease-in-out 0s 1 normal forwards;
+}
+
 .cards-border {
     --outer-neon-color: #BFACE2;
 
@@ -56,5 +65,12 @@ body {
     }
     50% {
         transform: scale(1.2);
+    }
+}
+
+@keyframes select-fade-out {
+    to {
+        opacity: 0;
+        transform: scale(1.1);
     }
 }

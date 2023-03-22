@@ -6,3 +6,7 @@ export interface Stopwatch {
     minutes: number
     seconds: number
 }
+
+export interface BoardStyleOptions {
+    number: string
+}
