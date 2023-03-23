@@ -85,9 +85,15 @@ function App() {
 
     function initGame(totalCards: number) {
         const boardStyleOptions = new Map([
-            [16, [' grid-cols-4 grid-rows-4', ' w-36 h-36']],
-            [24, [' grid-cols-6 grid-rows-4', ' w-32 h-32']],
-            [32, [' grid-cols-8 grid-rows-4', ' w-28 h-28']],
+            [16, [' grid-cols-4 grid-rows-4', ' w-full h-full md:w-28 md:h-28 lg:w-36 lg:h-36']],
+            [
+                24,
+                [
+                    ' grid-cols-6 grid-rows-4',
+                    ' w-[97%] h-[97%] md:w-20 md:h-20 lg:w-24 lg:h-24 xl:w-32 xl:h-32',
+                ],
+            ],
+            [32, [' grid-cols-8 grid-rows-4', '']],
         ])
         const imagesNeeded = Object.entries(images).slice(0, Number(totalCards / 2))
         shuffledImages.current = shuffle([
@@ -106,19 +112,19 @@ function App() {
     }
 
     return (
-        <div className="main w-full h-[100vh] flex items-center justify-between">
+        <div className="main w-full h-[100vh] max-h-full flex flex-col-reverse md:flex-row items-center justify-between">
             <GameStats size={boardSize} moves={movesCount} stopwatch={stopwatch} />
             {boardSize && (
                 <div
                     className={
-                        'cards grid gap-4 bg-[#66347F] p-3 rounded-2xl cards-border items-center justify-evenly' +
+                        'cards grid gap-[5px] sm:gap-2 lg:gap-4 bg-[#66347F] p-1 lg:p-3 rounded-2xl cards-border items-center justify-evenly w-[90%] md:w-auto transform' +
                         gridConfig[0]
                     }
                     ref={cardsRef}>
                     {shuffledImages.current.map((imageKey, index) => (
                         <div
                             className={
-                                'card flex items-center justify-center m-auto bg-[#D5B4B4] border-[3px] border-solid border-[#F5EBEB] rounded-lg' +
+                                'card flex items-center justify-center m-auto bg-[#D5B4B4] border-[2px] sm:border-[3px] border-solid border-[#F5EBEB] rounded-lg w-[97%] h-full md:w-16 md:h-20 lg:w-24 lg:h-24 xl:w-28 xl:h-28' +
                                 gridConfig[1] +
                                 (guessedCards.includes(index) ? ' guessed' : '') +
                                 (matchedCards.includes(imageKey) ? ' matched' : '')
@@ -146,12 +152,12 @@ function App() {
             )}
             {(selectBoardMenu || endGameStats) && (
                 <div
-                    className="modal-backdrop w-full h-full bg-[rgba(0,0,0,0.5)] absolute duration-200 transition"
+                    className="modal-backdrop w-full h-screen bg-[rgba(0,0,0,0.5)] absolute duration-200 transition"
                     ref={modalBackdropRef}
                 />
             )}
             {selectBoardMenu && <GameSelectionModal initGame={initGame} />}
-            <div className="empty-space w-28 h-full bg-slate-500" />
+            <div className="empty-space w-0 lg:w-4 xl:w-20 h-0 md:h-full bg-slate-500" />
         </div>
     )
 }

@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -15,6 +16,11 @@ body {
     height: 100vh;
     background-color: #64748b;
     font-family: Inter, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.font-title {
+    font-family: 'Permanent Marker', Inter, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-shadow: 0px 2px 8px rgba(231, 216, 255, 0.5);
 }
 
 .choice-btn-interact:hover {
@@ -45,16 +51,21 @@ body {
 }
 
 .card.matched {
-    /* border: 3px solid rgb(180, 231, 180); */
     border: 3px solid rgb(179, 255, 174);
     transition: all 200ms ease-in-out;
 }
 
 @keyframes glitch-border {
-    0%, 8%, 16%, 24%, 32%, 40%, 48% {
+    /* 0%, 8%, 16%, 24%, 32%, 40%, 48% {
         box-shadow: 0 0 20px var(--outer-neon-color);
     }
     4%, 12%, 20%, 28%, 36%, 44% {
+        box-shadow: 0 0 10px var(--outer-neon-color);
+    } */
+    0%, 16%, 32% {
+        box-shadow: 0 0 20px var(--outer-neon-color);
+    }
+    8%, 24%, 40% {
         box-shadow: 0 0 10px var(--outer-neon-color);
     }
 }

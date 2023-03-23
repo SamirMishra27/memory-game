@@ -11,6 +11,10 @@ import cricket from './assets/cricket.png'
 import table from './assets/table.png'
 import formula1 from './assets/formula1.png'
 import computer from './assets/computer.png'
+import dice from './assets/dice.png'
+import badminton from './assets/badminton.png'
+import sword from './assets/sword.png'
+import plank from './assets/plank.png'
 
 import { ImagesDict } from './types'
 
@@ -29,4 +33,9 @@ export const images: ImagesDict = {
     table: table,
     formula1: formula1,
     computer: computer,
+
+    dice: dice,
+    badminton: badminton,
+    sword: sword,
+    plank: plank,
 }
