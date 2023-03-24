@@ -22,7 +22,7 @@ export default function GameSelectionModal(props: { initGame: (param: number) =>
 
     return (
         <div
-            className="select-level-menu absolute flex flex-col items-center justify-evenly bg-[#408E91] rounded-lg p-4 space-y-4 left-0 right-0 top-0 bottom-0 m-auto w-[90%] sm:w-[35rem] h-44 md:h-52"
+            className="select-level-menu absolute flex flex-col items-center justify-evenly bg-[#408E91] rounded-lg p-4 space-y-4 left-0 right-0 top-0 bottom-0 m-auto w-[90%] sm:w-[35rem] h-44 md:h-56"
             ref={selectModalRef}>
             <h2 className="text-[#FFF2CC] font-semibold text-xl md:text-3xl">
                 Choose the difficulty

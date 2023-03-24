@@ -10,3 +10,9 @@ export interface Stopwatch {
 export interface BoardStyleOptions {
     number: string
 }
+
+export interface EndGameStats {
+    moves: number
+    time: Stopwatch
+    boardSize: number
+}

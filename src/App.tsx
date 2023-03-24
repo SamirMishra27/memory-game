@@ -6,7 +6,8 @@ import GameSelectionModal from './components/GameSelectionModal'
 
 import { images } from './images'
 import { shuffle } from './utils'
-import { Stopwatch } from './types'
+import { Stopwatch, EndGameStats } from './types'
+import EndScreen from './components/EndScreen'
 
 function App() {
     // Components ref
@@ -18,10 +19,6 @@ function App() {
     const stopwatchTask = useRef(0)
     const shuffledImages = useRef<string[]>([])
 
-    // State - to control hidden modals
-    const [selectBoardMenu, setSelectMenu] = useState(true)
-    const [endGameStats, setEndGameStats] = useState(false)
-
     // State - to update and set time elapsed
     const [lastUpdate, setUpdate] = useState(Date.now())
     const [stopwatch, setStopwatch] = useState<Stopwatch>({
@@ -29,13 +26,29 @@ function App() {
         minutes: 0,
     })
 
+    // State - to control hidden modals
+    const [selectBoardMenu, setSelectMenu] = useState(true)
+    const [endGameStats, setEndGameStats] = useState<EndGameStats>({
+        boardSize: 0,
+        moves: 0,
+        time: stopwatch,
+    })
+
     // State - to manage the game
     const [gridConfig, setGridConfig] = useState<string[]>([])
-    const [boardSize, setBoardSize] = useState(0) //useState(16)
+    const [boardSize, setBoardSize] = useState(0)
     const [movesCount, setMovesCount] = useState(0)
 
     const [guessedCards, setGuessed] = useState<number[]>([]) // Array of card ids
     const [matchedCards, setMatched] = useState<string[]>([]) // Array of matched card names
+
+    function showEndGameStats() {
+        setEndGameStats({
+            moves: movesCount,
+            time: stopwatch,
+            boardSize: boardSize,
+        })
+    }
 
     function matchCards() {
         const [index1, index2] = [guessedCards[0], guessedCards[1]]
@@ -53,6 +66,7 @@ function App() {
         // Check endgame
         if (shuffledImages.current.length / 2 === matchedCards.length) {
             clearInterval(stopwatchTask.current)
+            showEndGameStats()
         } else resolveClick.current = true
     }
 
@@ -112,7 +126,7 @@ function App() {
     }
 
     return (
-        <div className="main w-full h-[100vh] max-h-full flex flex-col-reverse md:flex-row items-center justify-between">
+        <div className="main w-full h-[100vh] max-h-full flex flex-col-reverse md:flex-row items-center justify-between relative">
             <GameStats size={boardSize} moves={movesCount} stopwatch={stopwatch} />
             {boardSize && (
                 <div
@@ -150,13 +164,17 @@ function App() {
                     ))}
                 </div>
             )}
-            {(selectBoardMenu || endGameStats) && (
+            {(!!selectBoardMenu || !!endGameStats.moves) && (
                 <div
-                    className="modal-backdrop w-full h-screen bg-[rgba(0,0,0,0.5)] absolute duration-200 transition"
+                    className={
+                        'modal-backdrop w-full h-screen bg-[rgba(0,0,0,0.5)] absolute duration-200 transition' +
+                        (endGameStats ? ' fade-in opacity-0' : '')
+                    }
                     ref={modalBackdropRef}
                 />
             )}
-            {selectBoardMenu && <GameSelectionModal initGame={initGame} />}
+            {!!selectBoardMenu && <GameSelectionModal initGame={initGame} />}
+            {!!endGameStats.moves && <EndScreen endGameStats={endGameStats} />}
             <div className="empty-space w-0 lg:w-4 xl:w-20 h-0 md:h-full bg-slate-500" />
         </div>
     )

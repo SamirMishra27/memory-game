@@ -32,6 +32,15 @@ body {
     animation: select-fade-out 200ms ease-in-out 0s 1 normal forwards;
 }
 
+.fade-in {
+    animation: fade-in 200ms ease-in-out 0s 1 normal forwards;
+}
+
+.end-screen {
+    box-shadow: inset 0px 0px 6px 4px #2b6062;
+    animation: end-screen-appear 300ms ease-in-out 0s 1 normal forwards;
+}
+
 .cards-border {
     --outer-neon-color: #BFACE2;
 
@@ -83,5 +92,25 @@ body {
     to {
         opacity: 0;
         transform: scale(1.1);
+    }
+}
+
+@keyframes fade-in {
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes end-screen-appear {
+    from {
+        opacity: 0.5;
+        transform: scale(1.1);
+    }
+    50% {
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
     }
 }
