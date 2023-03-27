@@ -168,7 +168,7 @@ function App() {
                 <div
                     className={
                         'modal-backdrop w-full h-screen bg-[rgba(0,0,0,0.5)] absolute duration-200 transition' +
-                        (endGameStats ? ' fade-in opacity-0' : '')
+                        (endGameStats.boardSize ? ' fade-in opacity-0' : '')
                     }
                     ref={modalBackdropRef}
                 />
