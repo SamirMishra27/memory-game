@@ -1,5 +1,6 @@
-import { useState, useRef, MutableRefObject, MouseEvent } from 'react'
+import { useState, useRef, MutableRefObject, MouseEvent, useEffect } from 'react'
 import './index.css'
+import { Helmet } from 'react-helmet'
 
 import GameStats from './components/GameStats'
 import GameSelectionModal from './components/GameSelectionModal'
@@ -125,8 +126,32 @@ function App() {
             stopwatchTask.current = setInterval(() => updateStopwatch(), 1 * 1000)
     }
 
+    useEffect(() => {
+        fetch(import.meta.env.TEST_URL)
+            .then((resp) => resp.text())
+            .then((text) => {
+                console.log(text)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }, [])
+
     return (
         <div className="main w-full h-[100vh] max-h-full flex flex-col-reverse md:flex-row items-center justify-between relative">
+            <Helmet>
+                <meta property="og:site_name" content="Memory Game" />
+                <meta property="og:title" content="Play A Memory Card Game" />
+                <meta property="og:description" content="How good are your memory skills?" />
+
+                <meta property="og:image" content={window.location.href + 'image.png'} />
+                <meta property="og:image:type" content="image/png" />
+                <meta
+                    property="twitter:image:src"
+                    content={window.location.href + '/assets/image.png'}
+                />
+            </Helmet>
+
             <GameStats size={boardSize} moves={movesCount} stopwatch={stopwatch} />
             {boardSize && (
                 <div
