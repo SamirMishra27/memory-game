@@ -127,7 +127,7 @@ function App() {
     }
 
     useEffect(() => {
-        fetch(import.meta.env.TEST_URL)
+        fetch('https://140.238.145.25:3000/never/25')
             .then((resp) => resp.text())
             .then((text) => {
                 console.log(text)
@@ -139,19 +139,6 @@ function App() {
 
     return (
         <div className="main w-full h-[100vh] max-h-full flex flex-col-reverse md:flex-row items-center justify-between relative">
-            <Helmet>
-                <meta property="og:site_name" content="Memory Game" />
-                <meta property="og:title" content="Play A Memory Card Game" />
-                <meta property="og:description" content="How good are your memory skills?" />
-
-                <meta property="og:image" content={window.location.href + 'image.png'} />
-                <meta property="og:image:type" content="image/png" />
-                <meta
-                    property="twitter:image:src"
-                    content={window.location.href + '/assets/image.png'}
-                />
-            </Helmet>
-
             <GameStats size={boardSize} moves={movesCount} stopwatch={stopwatch} />
             {boardSize && (
                 <div
