@@ -1,4 +1,4 @@
-import { useState, useRef, MutableRefObject, MouseEvent, useEffect } from 'react'
+import { useState, useRef, MutableRefObject, MouseEvent } from 'react'
 import './index.css'
 import { Helmet } from 'react-helmet'
 
@@ -126,17 +126,6 @@ function App() {
             stopwatchTask.current = setInterval(() => updateStopwatch(), 1 * 1000)
     }
 
-    useEffect(() => {
-        fetch('https://140.238.145.25:3000/never/25')
-            .then((resp) => resp.text())
-            .then((text) => {
-                console.log(text)
-            })
-            .catch((err) => {
-                console.log(err)
-            })
-    }, [])
-
     return (
         <div className="main w-full h-[100vh] max-h-full flex flex-col-reverse md:flex-row items-center justify-between relative">
             <Helmet>
@@ -146,11 +135,11 @@ function App() {
                     content="Play A Memory Card Game"
                     data-react-helmet="true"
                 />
-                {/* <meta
+                <meta
                     property="og:description"
                     content="How good are your memory skills?"
                     data-react-helmet="true"
-                /> */}
+                />
 
                 <meta
                     property="og:image"
@@ -163,8 +152,6 @@ function App() {
                     content="https://media.discordapp.net/attachments/795951827232358400/1092358566339428443/Screenshot_2023-03-23_012431.png"
                     data-react-helmet="true"
                 />
-                <meta name="twitter:card" content="summary_large_image" data-react-helmet="true" />
-                <meta name="theme-color" content="#FFE483" data-react-helmet="true" />
             </Helmet>
             <GameStats size={boardSize} moves={movesCount} stopwatch={stopwatch} />
             {boardSize && (
