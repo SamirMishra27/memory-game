@@ -17,7 +17,7 @@ function App() {
 
     // Internal refs
     const resolveClick = useRef(true)
-    const stopwatchTask = useRef(0)
+    const stopwatchTask = useRef<NodeJS.Timer | number>(0)
     const shuffledImages = useRef<string[]>([])
 
     // State - to update and set time elapsed
@@ -139,6 +139,31 @@ function App() {
 
     return (
         <div className="main w-full h-[100vh] max-h-full flex flex-col-reverse md:flex-row items-center justify-between relative">
+            <Helmet>
+                <meta content="Memory Game" data-react-helmet="true" property="og:site_name" />
+                <meta
+                    content="Play A Memory Card Game"
+                    data-react-helmet="true"
+                    property="og:title"
+                />
+                <meta
+                    content="How good are your memory skills?"
+                    data-react-helmet="true"
+                    property="og:description"
+                />
+
+                <meta
+                    content="https://media.discordapp.net/attachments/795951827232358400/1092358566339428443/Screenshot_2023-03-23_012431.png"
+                    data-react-helmet="true"
+                    property="og:image"
+                />
+                <meta content="image/png" data-react-helmet="true" property="og:image:type" />
+                <meta
+                    content="https://media.discordapp.net/attachments/795951827232358400/1092358566339428443/Screenshot_2023-03-23_012431.png"
+                    data-react-helmet="true"
+                    property="twitter:image:src"
+                />
+            </Helmet>
             <GameStats size={boardSize} moves={movesCount} stopwatch={stopwatch} />
             {boardSize && (
                 <div
