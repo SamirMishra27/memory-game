@@ -163,6 +163,8 @@ function App() {
                     content="https://media.discordapp.net/attachments/795951827232358400/1092358566339428443/Screenshot_2023-03-23_012431.png"
                     data-react-helmet="true"
                 />
+                <meta name="twitter:card" content="summary_large_image" data-react-helmet="true" />
+                <meta name="theme-color" content="#FFE483" data-react-helmet="true" />
             </Helmet>
             <GameStats size={boardSize} moves={movesCount} stopwatch={stopwatch} />
             {boardSize && (
