@@ -163,8 +163,6 @@ function App() {
                     data-react-helmet="true"
                     property="twitter:image:src"
                 />
-                <meta name="twitter:card" content="summary_large_image" data-react-helmet="true" />
-                <meta name="theme-color" content="#FFE483" data-react-helmet="true" />
             </Helmet>
             <GameStats size={boardSize} moves={movesCount} stopwatch={stopwatch} />
             {boardSize && (
