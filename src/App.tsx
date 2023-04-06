@@ -153,16 +153,18 @@ function App() {
                 />
 
                 <meta
-                    content="https://media.discordapp.net/attachments/795951827232358400/1092358566339428443/Screenshot_2023-03-23_012431.png"
+                    content={window.location.href + 'image.png'}
                     data-react-helmet="true"
                     property="og:image"
                 />
                 <meta content="image/png" data-react-helmet="true" property="og:image:type" />
                 <meta
-                    content="https://media.discordapp.net/attachments/795951827232358400/1092358566339428443/Screenshot_2023-03-23_012431.png"
+                    content={window.location.href + 'image.png'}
                     data-react-helmet="true"
                     property="twitter:image:src"
                 />
+                <meta content="summary_large_image" name="twitter:card" data-react-helmet="true" />
+                <meta content="#FFE483" name="theme-color" data-react-helmet="true" />
             </Helmet>
             <GameStats size={boardSize} moves={movesCount} stopwatch={stopwatch} />
             {boardSize && (
