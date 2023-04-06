@@ -1,5 +1,6 @@
 import { useState, useRef, MutableRefObject, MouseEvent } from 'react'
 import './index.css'
+import { Helmet } from 'react-helmet'
 
 import GameStats from './components/GameStats'
 import GameSelectionModal from './components/GameSelectionModal'
@@ -16,7 +17,7 @@ function App() {
 
     // Internal refs
     const resolveClick = useRef(true)
-    const stopwatchTask = useRef(0)
+    const stopwatchTask = useRef<NodeJS.Timer | number>(0)
     const shuffledImages = useRef<string[]>([])
 
     // State - to update and set time elapsed
@@ -127,6 +128,31 @@ function App() {
 
     return (
         <div className="main w-full h-[100vh] max-h-full flex flex-col-reverse md:flex-row items-center justify-between relative">
+            <Helmet>
+                <meta property="og:site_name" content="Memory Game" data-react-helmet="true" />
+                <meta
+                    property="og:title"
+                    content="Play A Memory Card Game"
+                    data-react-helmet="true"
+                />
+                <meta
+                    property="og:description"
+                    content="How good are your memory skills?"
+                    data-react-helmet="true"
+                />
+
+                <meta
+                    property="og:image"
+                    content="https://media.discordapp.net/attachments/795951827232358400/1092358566339428443/Screenshot_2023-03-23_012431.png"
+                    data-react-helmet="true"
+                />
+                <meta property="og:image:type" content="image/png" data-react-helmet="true" />
+                <meta
+                    property="twitter:image:src"
+                    content="https://media.discordapp.net/attachments/795951827232358400/1092358566339428443/Screenshot_2023-03-23_012431.png"
+                    data-react-helmet="true"
+                />
+            </Helmet>
             <GameStats size={boardSize} moves={movesCount} stopwatch={stopwatch} />
             {boardSize && (
                 <div
